@@ -1,0 +1,308 @@
+@import 'mixins.scss';
+@import 'variables.scss';
+
+html{
+	background-color: $bgColor;
+}
+
+body{ 
+	font-family: $lato;
+	font-size: $baseFontSize*1.4;
+}
+
+main{
+  padding-top: 45px;
+  &.rtl{
+    direction: rtl;
+  }
+}
+
+header{
+	background-color: $bgColor;
+  position: fixed;
+  left: 0;
+  width: 100%;
+  z-index: 3;
+
+  @media screen and (max-width: $break-sm) {
+    height: 45px;
+  }
+}
+
+footer{
+	background-color: $bgColor;
+	bottom: 0px;
+	height: $footerHeight;
+	width: 100%;
+	display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .footer-div{
+  		text-align: center;
+  	}
+}
+
+h3{
+	@include mixin-marginTB(10px);
+	font-size: $baseFontSize*1.6;
+
+	@media screen and (max-width: $break-sm) {
+		@include mixin-marginTB(5px);
+		font-size: $baseFontSize*1.5;
+	}
+}
+
+aside{
+  @include mixin-paddingTB(35px);
+
+  article{
+    font-size: $baseFontSize*1.8;
+  }
+}
+
+#articlesList{
+  padding: 35px 0;
+  
+	article{
+		@include mixin-paddingTB(15px);
+	}
+}
+
+.single-article{
+	@include mixin-marginTB(5px);
+
+	@media screen and (min-width: $break-sm+1){ 
+		min-height: 50px;
+	}
+}
+
+.article_title{
+	@include mixin-transition(0.5s);
+	background-color: $articleTitleBoxColor;
+	cursor: pointer;
+	height: 100%;
+
+	&:hover{
+		box-shadow: inset 0px 0px 3px 2px $articleTitleBoxShadow;
+	}
+}
+.loadmore{
+	margin: 5px 0;
+	text-align: center;
+  
+
+	span{
+		border: 1px solid gray;
+		text-align: center;
+		vertical-align: middle;
+		border-radius: 2px;
+		cursor: pointer;
+		display: block;
+		font-weight: 600;
+		line-height: 25px;
+		margin: 1px;
+		padding: 5px;
+    @include mixin-transition(0.5s);
+
+		&:hover{
+			background-color: #AF8C3E;
+		}
+
+		&.active {
+			background-color: lightgray	;
+		}
+	}	
+}
+
+div.mobile-menu{
+  z-index: 10;
+  display: none;
+  height: 30px;
+  width: 40px;
+  top: 7px;
+  left: 18px;
+  cursor: pointer;
+  position: absolute;
+  border: 2px solid $secColor;
+  @include mixin-border-radius(5px);
+
+  @media screen and (max-width: $break-sm){ 
+    display: block;
+  }
+
+  span{
+    position: relative;
+    display: block;
+    width: 80%;
+    left: 10%;
+    height: 2px;
+    background-color: $secColor;
+
+    &:nth-child(1){
+      top: 25%;
+    }
+
+    &:nth-child(2){
+      top: 40%;
+    }
+
+    &:nth-child(3){
+      top: 55%;
+    }
+  }
+}
+
+div.menu{
+  position: relative;
+  max-width: 100%;
+  background-color: #AF8C3E;
+  @include mixin-transition(0.5s, all, linear);
+
+  @media screen and (max-width: $break-sm) {
+    position: absolute;
+    height: 100vh;
+    left: -100%;
+    top: 0px;
+    padding-top: 45px;
+    opacity: 0;
+  }
+
+  &.visible-menu {
+    left: 0%;
+    opacity: 1;
+  }
+  
+  ul.menu-list{
+    margin: 0;
+    padding: 0;
+    @extend .flex-container;
+
+    @media screen and (max-width: $break-sm) {
+      display: block !important;
+    }
+
+    li{   
+      display: inline-block;
+      text-align: center;
+      @include mixin-transition (0.4s, background);
+      @extend .flex-item;
+
+      @media screen and (min-width: $break-sm) {
+        background-image: linear-gradient(to bottom, transparent 50%,  $bgColor 55%, #FFEABA 55%, #FFEABA 95%, $bgColor 95%);
+        background-size: 100% 200%;
+      }
+
+      @media screen and (max-width: $break-sm) {
+        background-image: linear-gradient(to right, transparent 50%,  $bgColor 55%, #FFEABA 55%, #FFEABA 95%, $bgColor 95%);
+        background-size: 200% 100%;
+        display: block;
+        padding: 0 10px;
+      }
+
+      &.switch-li{
+        display: flex;
+        align-items: center;
+        justify-content: center;
+      }
+
+      &:not(.switch-li):hover {
+        
+        @media screen and (min-width: $break-sm) {
+          background-position: bottom center;
+          color: rgba(0, 0, 0, 0.75);
+        }
+        
+        @media screen and (max-width: $break-sm) {
+          background-position: right center;
+          color: rgba(0, 0, 0, 0.75);
+        }
+      }
+
+      a{
+        display: block;
+        color:white;
+        font-size: $baseFontSize * 1.8;
+        padding: 10px;
+        &:hover, &:active, &:focus {
+        text-decoration: none;
+        }
+      }
+    }
+  }
+}
+
+
+/*----------*/
+.flex-container {
+	display: -webkit-flex;
+	display: flex;
+	-webkit-flex-flow: row wrap;
+	flex-flow: row wrap;
+}
+.flex-item {
+	-webkit-flex: 1 0 auto;
+	flex: 1 0 auto; 
+}
+
+/*Switch*/
+
+.switch {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+
+  .cmn-toggle {
+    position: absolute;
+    visibility: hidden;
+  }
+  
+  .cmn-toggle + label {
+    display: inline-block;
+    position: relative;
+    cursor: pointer;
+    outline: none;
+    @include mixin-user-select();
+  }
+
+  input.cmn-toggle-round-flat + label {
+    padding: 2px;
+    width: 50px;
+    height: 25px;
+    @include mixin-transition (0.4s, background);
+    @include mixin-border-radius(60px);
+  }
+
+  input.cmn-toggle-round-flat + label:before, input.cmn-toggle-round-flat + label:after {
+    display: block;
+    position: absolute;
+    content: "";
+  }
+
+  input.cmn-toggle-round-flat + label:before {
+    border: 2px solid #dab167;
+    top: 2px;
+    left: 2px;
+    bottom: 2px;
+    right: 2px;
+    @include mixin-transition (0.4s, background);
+    @include mixin-border-radius(60px);
+  }
+
+  input.cmn-toggle-round-flat + label:after {
+    top: 4px;
+    left: 4px;
+    bottom: 4px;
+    width: calc(40%);
+    background-color: #dddddd;
+    @include mixin-transition (0.4s);
+    @include mixin-border-radius(52px);
+  }
+
+  input.cmn-toggle-round-flat:checked + label:after {
+    margin-left: calc(60% - 8px);
+    background-color: #8ce196;
+  }
+}
+
+

@@ -1,0 +1,32 @@
+
+@mixin mixin-transition($time: 1s, $elem: all, $type: ease ){
+	-webkit-transition: $elem $time $type;
+	-moz-transition: $elem $time $type;
+	-ms-transition: $elem $time $type;
+	-o-transition: $elem $time $type;
+	transition: $elem $time $type;
+}
+
+@mixin mixin-marginTB($pixels){
+	margin-top: $pixels;
+	margin-bottom: $pixels;
+}
+
+@mixin mixin-paddingTB($pixels){
+	padding-top: $pixels;
+	padding-bottom: $pixels;
+}
+
+@mixin mixin-user-select($style: none){
+	-webkit-user-select: $style;
+  	-moz-user-select: $style;
+  	-ms-user-select: $style;
+ 	user-select: $style;
+}
+
+@mixin mixin-border-radius($val){
+	-webkit-border-radius: $val;
+  	-moz-border-radius: $val;
+ 	-ms-border-radius: $val;
+  	-o-border-radius: $val;
+}
